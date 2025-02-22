@@ -8,6 +8,7 @@ class FirstScene extends Phaser.Scene {
     this.player;
     this.movingPlatform;
     this.movingPlatform2;
+    this.importantCollider;
   }
 
   preload ()
@@ -43,23 +44,24 @@ class FirstScene extends Phaser.Scene {
       
       var textGroup = Util.createTextGroup(this, "Testing text iteration with loops.\nNeed to make sure it works longerrrr.", 100, 400);
       this.movingPlatform = Util.createTextGroup(this, 100, 10, 
-        `╔═════════════════╗                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
+        `╔═════════════════╗
+║                 ║
+║                 ║
+║                 ║
+║                 ║
+║                 ║
 ╚═════════════════╝` 
         );
+      this.importantCollider = this.physics.add.collider(this.player,this.movingPlatform);
       console.log(textGroup);
 
       this.movingPlatform2 = this.add.bitmapText(100, 300, 'jgs-20', 
-        `╔═════════════════╗                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
-║                 ║                               
+        `╔═════════════════╗
+║                 ║
+║                 ║
+║                 ║
+║                 ║
+║                 ║
 ╚═════════════════╝`, 20);
       //text3.setLetterSpacing(0); does nothing, but is valid code
   
@@ -80,6 +82,7 @@ class FirstScene extends Phaser.Scene {
     //console.log(text.width);
     //console.log(text.body);
     //console.log(player.body.blocked.down);
+    console.log(this.player);
     this.movingPlatform.incX(3);
     this.movingPlatform2.x = this.movingPlatform2.x + 3;
     if(this.player.body.blocked.down) {
