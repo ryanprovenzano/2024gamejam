@@ -1,6 +1,4 @@
 import * as Util from "./util.js"
-import * as GroupConfigs from "./GroupConfigs.js";
-
 
 class FirstScene extends Phaser.Scene {
 
@@ -41,8 +39,8 @@ class FirstScene extends Phaser.Scene {
       this.add.bitmapText(100, 300, 'jgs-20', "Testing text iteration with loops.\nNeed to make sure it works longerrrr.", 20);
       
       
-      var textGroup = this.add.group(Util.createText(this, "Testing text iteration with loops.\nNeed to make sure it works longerrrr.", 100, 400), GroupConfigs.BITMAP);
-      var textGroup2 = this.add.group(Util.createText(this, 
+      var textGroup = Util.createTextGroup(this, "Testing text iteration with loops.\nNeed to make sure it works longerrrr.", 100, 400);
+      var textGroup2 = Util.createTextGroup(this, 
         
         `╔═════════════════╗                               
 ║                 ║                               
@@ -51,7 +49,7 @@ class FirstScene extends Phaser.Scene {
 ║                 ║                               
 ║                 ║                               
 ╚═════════════════╝`, 
-        25, 10), GroupConfigs.BITMAP);
+        25, 10);
       console.log(textGroup);
 
       this.add.bitmapText(500, 300, 'jgs-20', `

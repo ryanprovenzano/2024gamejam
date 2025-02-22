@@ -1,4 +1,6 @@
-export function createText(scene, text, x, y){
+import * as GroupConfigs from "./GroupConfigs.js";
+
+export function createTextGroup(scene, text, x, y){
     const arrayOfText = [];
     let hOffset = 0;
     let vOffset = 0;
@@ -12,5 +14,5 @@ export function createText(scene, text, x, y){
       arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, 'jgs-20', text[i], 20));
       hOffset++;
     }
-    return arrayOfText;
+    return scene.add.group(arrayOfText, GroupConfigs.BITMAP);
 }
