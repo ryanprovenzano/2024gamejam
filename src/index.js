@@ -6,6 +6,8 @@ class FirstScene extends Phaser.Scene {
   {
     super('FirstScene');
     this.player;
+    this.movingPlatform;
+    this.movingPlatform2;
   }
 
   preload ()
@@ -40,26 +42,25 @@ class FirstScene extends Phaser.Scene {
       
       
       var textGroup = Util.createTextGroup(this, "Testing text iteration with loops.\nNeed to make sure it works longerrrr.", 100, 400);
-      var textGroup2 = Util.createTextGroup(this, 
-        
+      this.movingPlatform = Util.createTextGroup(this, 100, 10, 
         `╔═════════════════╗                               
 ║                 ║                               
 ║                 ║                               
 ║                 ║                               
 ║                 ║                               
 ║                 ║                               
-╚═════════════════╝`, 
-        25, 10);
+╚═════════════════╝` 
+        );
       console.log(textGroup);
 
-      this.add.bitmapText(500, 300, 'jgs-20', `
-        ╔═════════════════╗                               
-        ║                 ║                               
-        ║                 ║                               
-        ║                 ║                               
-        ║                 ║                               
-        ║                 ║                               
-        ╚═════════════════╝`, 20);
+      this.movingPlatform2 = this.add.bitmapText(100, 300, 'jgs-20', 
+        `╔═════════════════╗                               
+║                 ║                               
+║                 ║                               
+║                 ║                               
+║                 ║                               
+║                 ║                               
+╚═════════════════╝`, 20);
       //text3.setLetterSpacing(0); does nothing, but is valid code
   
       /**@type {Phaser.GameObjects.Rectangle} */
@@ -79,6 +80,8 @@ class FirstScene extends Phaser.Scene {
     //console.log(text.width);
     //console.log(text.body);
     //console.log(player.body.blocked.down);
+    this.movingPlatform.incX(3);
+    this.movingPlatform2.x = this.movingPlatform2.x + 3;
     if(this.player.body.blocked.down) {
         //text.setText("asdas           asdasd");
         //text.body.updateBounds(); doesn't do anything here

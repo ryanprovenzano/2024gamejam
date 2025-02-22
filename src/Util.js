@@ -1,6 +1,6 @@
 import * as GroupConfigs from "./GroupConfigs.js";
 
-export function createTextGroup(scene, text, x, y){
+export function createTextGroup(scene, x, y, text){
     const arrayOfText = [];
     let hOffset = 0;
     let vOffset = 0;
