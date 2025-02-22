@@ -11,8 +11,10 @@ export function createTextGroup(scene, x, y, text){
         vOffset++;
         continue;
       }
-      ;
-      arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, 'jgs-20', text[i], 20));
+      
+      if(text[i] != " "){
+        arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, 'jgs-20', text[i], 20));
+      }
       hOffset++;
     }
     const group = scene.add.group(arrayOfText, GroupConfigs.BITMAP)
