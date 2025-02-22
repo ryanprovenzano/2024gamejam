@@ -1,7 +1,7 @@
 import * as GroupConfigs from "./GroupConfigs.js";
 
 //TODO: This function should not create a character when the character is blank(null) 
-export function createTextGroup(scene, x, y, text){
+export function createDynamicTextGroup(scene, x, y, text){
     const arrayOfText = [];
     let hOffset = 0;
     let vOffset = 0;
@@ -18,6 +18,6 @@ export function createTextGroup(scene, x, y, text){
       hOffset++;
     }
     const group = scene.add.group(arrayOfText, GroupConfigs.BITMAP)
-    scene.physics.world.enable(group, 1); //1 for static body, 0 for dynamic body
+    scene.physics.world.enable(group, 0); //1 for static body, 0 for dynamic body. Since this text moves, it needs to be a dynamic body.
     return group;
 }

@@ -33,13 +33,12 @@ class FirstScene extends Phaser.Scene {
     this.physics.add.existing(this.player);
     console.log(this.player.body);
 
-    /**@type {Phaser.Physics.Arcade.StaticGroup} */
-    let platforms = this.physics.add.staticGroup();
+    
 
     // Parameters: x, y, font key, text to display, font size (should match the bitmapfile's font size)
     let text = this.add.bitmapText(
       200,
-      200,
+      300,
       "jgs-20",
       "Well it is working. I need this line to be longer though",
       20
@@ -59,16 +58,16 @@ class FirstScene extends Phaser.Scene {
       20
     );
 
-    var textGroup = Util.createTextGroup(
+    var textGroup = Util.createDynamicTextGroup(
       this,
       "Testing text iteration with loops.\nNeed to make sure it works longerrrr.",
       100,
       400
     );
-    this.movingPlatform = Util.createTextGroup(
+    this.movingPlatform = Util.createDynamicTextGroup(
       this,
       100,
-      10,
+      275,
       `╔═════════════════╗
 ║                 ║
 ║                 ║
@@ -82,11 +81,15 @@ class FirstScene extends Phaser.Scene {
       this.player,
       this.movingPlatform
     );
+    
+    for (let child of this.movingPlatform.getChildren()){
+      child.body.moves = false; // Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
+    }
     console.log(textGroup);
 
     this.movingPlatform2 = this.add.bitmapText(
       100,
-      300,
+      400,
       "jgs-20",
       `╔═════════════════╗
 ║                 ║
@@ -100,13 +103,14 @@ class FirstScene extends Phaser.Scene {
     //text3.setLetterSpacing(0); does nothing, but is valid code
     console.log(this.movingPlatform);
 
+
+    /**@type {Phaser.Physics.Arcade.StaticGroup} */
+    let platforms = this.physics.add.staticGroup();
+    
     /**@type {Phaser.GameObjects.Rectangle} */
-    const rect = this.add.rectangle(400, 250, 400, 10, 0xff0000);
+    const rect = this.add.rectangle(400, 400, 400, 10, 0xff0000);
     platforms.add(rect);
-    this.physics.add.existing(text);
-    text.body.setImmovable();
-    text.body.moves = false;
-    text.body.syncBounds = true; //this is what we needed do to get the text's collider to change when the text did
+    this.physics.add.existing(text, true); //Static body here appears to be sufficient, since the text never moves.
 
     //can pass Group (static group in this case) to the collider
     this.physics.add.collider(this.player, platforms);
