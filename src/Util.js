@@ -1,5 +1,6 @@
 import * as GroupConfigs from "./GroupConfigs.js";
 
+const containsWhitespace = str => /\s/.test(str);
 //TODO: This function should not create a character when the character is blank(null) 
 export function createDynamicTextGroup(scene, x, y, text){
     const arrayOfText = [];
@@ -12,8 +13,9 @@ export function createDynamicTextGroup(scene, x, y, text){
         continue;
       }
       
-      if(text[i] != " "){
-        arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, 'jgs-20', text[i], 20));
+      if(!containsWhitespace(text[i])){
+        arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, 'jgs5-20', text[i], 20));
+        console.log(text[i]);
       }
       hOffset++;
     }
