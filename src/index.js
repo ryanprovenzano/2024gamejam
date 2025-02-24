@@ -7,6 +7,8 @@ class FirstScene extends Phaser.Scene {
     this.movingPlatform;
     this.movingPlatform2;
     this.importantCollider;
+    this.font1;
+    this.font2;
   }
 
   preload() {
@@ -15,6 +17,13 @@ class FirstScene extends Phaser.Scene {
       "assets/fonts/jgs5-20px.png",
       "assets/fonts/jgs5-20px.xml"
     ); //use at 20px size
+    this.load.bitmapFont(
+      "cp437-20",
+      "assets/fonts/cp437-20px.png",
+      "assets/fonts/cp437-20px.xml"
+    ); //use at 20px size
+    this.font1 = "jgs5-20";
+    this.font2 = "cp437-20";
     this.load.text("sad_guy", "assets/sad_guy.txt");
     this.load.text("poo", "assets/poo.txt");
     this.load.text("enemy", "assets/enemy.txt");
@@ -36,58 +45,67 @@ class FirstScene extends Phaser.Scene {
     let text = this.add.bitmapText(
       200,
       300,
-      "jgs5-20",
+      this.font1,
       "Well it is working. I need this line to be longer though",
       20
     );
     this.add.bitmapText(
       200,
       150,
-      "jgs5-20",
+      this.font1,
       "Uhhh why is this shit upside down",
       20
     );
     this.add.bitmapText(
       100,
       300,
-      "jgs5-20",
+      this.font1,
       "Testing text iteration with loops.\nNeed to make sure it works longerrrr.",
       20
     );
 
     let textGroup = Util.createDynamicTextGroup(
       this,
-      "Testing text iteration with loops.\nNeed to make sure it works longerrrr.",
+      
       100,
-      400
+      400,
+      this.font1,
+      "Testing text iteration with loops.\nNeed to make sure it works longerrrr.",
     );
 
     let sadGuy = Util.createDynamicTextGroup(
       this,
       100,
       0,
+      this.font1,
       this.cache.text.get("sad_guy")
     );
 
+    
     let poo = Util.createDynamicTextGroup(
       this,
       500,
       200,
+      this.font1,
       this.cache.text.get("poo")
     );
-    console.log(this.cache.text.get("poo"))
 
+    
     let enemy = Util.createDynamicTextGroup(
       this,
       300,
       50,
+      this.font1,
       this.cache.text.get("enemy")
     );
-    console.log(this.cache.text.get("enemy"));
+    
+    
+    
     this.movingPlatform = Util.createDynamicTextGroup(
       this,
       100,
       275,
+      this.font1,
       this.cache.text.get("box")
     );
     console.log(this.movingPlatform);
@@ -99,15 +117,18 @@ class FirstScene extends Phaser.Scene {
     for (let child of this.movingPlatform.getChildren()) {
       child.body.moves = false; // Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
     }
-    console.log(textGroup);
 
-    this.movingPlatform2 = this.add.bitmapText(
+    this.movingPlatform2 = Util.createDynamicTextGroup(
+      this,
       100,
       450,
-      "jgs5-20",
-      this.cache.text.get("box"),
-      20
+      this.font1,
+      this.cache.text.get("enemy"),
     );
+    for (let child of this.movingPlatform2.getChildren()) {
+      child.body.moves = false; // Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
+    }
+
     //text3.setLetterSpacing(0); does nothing, but is valid code
     console.log(this.movingPlatform);
 
@@ -130,7 +151,7 @@ class FirstScene extends Phaser.Scene {
     //console.log(player.body.blocked.down);
     //console.log(this.player);
     this.movingPlatform.incX(3);
-    this.movingPlatform2.x = this.movingPlatform2.x + 3;
+    this.movingPlatform2.incX(6);
     if (this.player.body.blocked.down) {
       //text.setText("asdas           asdasd");
       //text.body.updateBounds(); doesn't do anything here
