@@ -1,6 +1,6 @@
 import * as GroupConfigs from "./GroupConfigs.js";
 const containsWhitespace = str => /\s/.test(str);
-export function createDynamicTextGroup(scene, x, y, font, text){
+export function createDynamicTextGroup(scene, x, y, font, text, active=true){
     const arrayOfText = [];
     let hOffset = 0;
     let vOffset = 0;
@@ -12,7 +12,7 @@ export function createDynamicTextGroup(scene, x, y, font, text){
       }
       
       if(!containsWhitespace(text[i])){
-        arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 20 * vOffset, font, text[i], 20));
+        arrayOfText.push(scene.add.bitmapText(x + 10 * hOffset, y + 10 * vOffset, font, text[i], 10).setActive(active));
       }
       hOffset++;
     }
