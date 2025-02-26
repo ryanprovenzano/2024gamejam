@@ -1,4 +1,9 @@
 import * as GroupConfigs from "./GroupConfigs.js";
+
+var physicsConf = {
+  allowGravity: false,
+  immovable: true
+};
 const containsWhitespace = str => /\s/.test(str);
 export function createDynamicTextGroup(scene, x, y, font, text, active=true){
     const arrayOfText = [];
@@ -16,7 +21,11 @@ export function createDynamicTextGroup(scene, x, y, font, text, active=true){
       }
       hOffset++;
     }
-    const group = scene.add.group(arrayOfText, GroupConfigs.BITMAP)
-    scene.physics.world.enable(group, 0); //1 for static body, 0 for dynamic body. Since this text moves, it needs to be a dynamic body.
-    return group;
+    const group = scene.add.group(arrayOfText, GroupConfigs.BITMAP) // Game group object
+    const physGroup = scene.physics.add.group(arrayOfText); //.group() for dynamic group; .staticGroup() for static groups // physics group
+    for (let text of physGroup.children.entries){
+      text.body.setAllowGravity(false)
+    }
+    console.log(group)
+    return physGroup;
 }

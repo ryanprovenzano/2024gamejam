@@ -9,6 +9,8 @@ class FirstScene extends Phaser.Scene {
     this.importantCollider;
     this.font1;
     this.font2;
+    this.unnamedTestGroup;
+    this.myTime = 0;
   }
 
   preload() {
@@ -117,7 +119,7 @@ class FirstScene extends Phaser.Scene {
       "Testing text iteration with loops.\nNeed to make sure it works longerrrr."
     );
 
-    let unnamedTest = Util.createDynamicTextGroup(
+    this.unnamedTestGroup = Util.createDynamicTextGroup(
       this,
       0,
       0,
@@ -203,6 +205,10 @@ class FirstScene extends Phaser.Scene {
     // TODO(?): needs to be redoneif (this.player.body.blocked.down) {
     //text.setText("asdas           asdasd");
     //text.body.updateBounds(); doesn't do anything here
+    this.unnamedTestGroup.children.entries[this.myTime].body.setAllowGravity(true);
+    if (this.myTime < (this.unnamedTestGroup.children.size - 1)){
+      this.myTime++;
+    }
   }
 }
 
